@@ -97,6 +97,9 @@
 }
 
 .todo-item__actions_delete {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 32px;
   height: 32px;
   border: none;
@@ -104,4 +107,14 @@
   background-color: rgb(217, 241, 161);
   margin-left: 5px;
   cursor: pointer;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: rgb(189, 189, 189);
+}
+
+.delete-todo-icon {
+  width: 18px;
+  height: 18px;
 }

@@ -14,7 +14,7 @@ function createTodoLiItem(todoTitle, creationDateAsString, expirationDateAsStrin
 
   const todoLiEl = document.createElement('li');
   todoLiEl.innerHTML = `
-    <li class="todo-item">
+    <li class="todo-item in-progress">
       <div class="todo-item__task">
         <h5 class="todo-item__task_title">${todoTitle}</h5>
         <div class="todo-item__task_creation">Created on: ${createdOn.toDateString()}</div>
@@ -22,11 +22,14 @@ function createTodoLiItem(todoTitle, creationDateAsString, expirationDateAsStrin
       </div>
       <div class="todo-item__actions">
         <input class="todo-item__actions_is-done" type="checkbox"></input>
-        <button class="todo-item__actions_delete">X</button>
+        <button class="todo-item__actions_delete">
+          <img  class="delete-todo-icon" src="./src/assets/icons/cross-solid.svg" alt="delete">
+        </button>
       </div>
     </li>`;
 
   setDeleteTodoButtonListener(todoLiEl);
+  setMarkTodoAsDoneCheckboxListener(todoLiEl);
 
   return todoLiEl;
 }
@@ -38,4 +41,17 @@ function generateTomorrowDate() {
 function setDeleteTodoButtonListener(todoLiEl) {
   const deleteButton = todoLiEl.querySelector('.todo-item__actions_delete');
   deleteButton.addEventListener('click', () => todoLiEl.remove());
+}
+
+function setMarkTodoAsDoneCheckboxListener(todoLiEl) {
+  const isDoneCheckbox = todoLiEl.querySelector('.todo-item__actions_is-done');
+  isDoneCheckbox.addEventListener('click', () => {
+    if (isDoneCheckbox.checked === true) {
+      todoLiEl.classList.remove('in-progress');
+      todoLiEl.classList.add('completed');
+    } else {
+      todoLiEl.classList.remove('completed');
+      todoLiEl.classList.add('in-progress');
+    }
+  });
 }
