@@ -16,5 +16,5 @@ export function openTodoFormModal(
     convertDateToStringToFormat(creationDateAsDate), 
     convertDateToStringToFormat(expirationDateAsDate), 
     todoElement
-  ));
+  ).element);
 }

@@ -1,5 +1,6 @@
 import { TodoItemElement } from "../todo-item/todo-item";
 import { addTodoToTodosList } from "../utils/add-todo-to-todos-list";
+import { removeInvalidClass } from "../utils/remove-invalid-class";
 
 export class TodoFormModalElement {
   #todoFormModalElement;
@@ -36,13 +37,15 @@ export class TodoFormModalElement {
     this.#setTodoTitleInputEventListeners();
     this.#setCancelButtonClickListener();
     this.#setSaveButtonClickListener();
+  }
 
+  get element() {
     return this.#todoFormModalElement;
   }
 
   #setCancelButtonClickListener = () => {
     const cancelButton = this.#todoFormModalElement.querySelector('.modal__actions_cancel');
-    cancelButton.addEventListener('click', () => this.#closeModal());
+    cancelButton.addEventListener('click', this.#closeModal);
   }
 
   #setSaveButtonClickListener = () => {
@@ -53,8 +56,8 @@ export class TodoFormModalElement {
 
   #setTodoTitleInputEventListeners = () => {
     const todoTitleInput = this.#todoFormModalElement.querySelector('.modal__form-control_input');
-    todoTitleInput.addEventListener('input', (event) => this.#toggleInvalidClassBasedOnValidity(event.target));
-    todoTitleInput.addEventListener('blur', (event) => event.target.classList.remove('invalid'));
+    todoTitleInput.addEventListener('input', this.#toggleInvalidClassBasedOnValidity);
+    todoTitleInput.addEventListener('blur', removeInvalidClass);
   }
 
   #permitOrDenyTodoSaving = (condition) => {
@@ -64,7 +67,7 @@ export class TodoFormModalElement {
       const creationDateAsString = document.getElementById('task-creation').value;
       const expirationDateAsString = document.getElementById('task-expiration').value;
       
-      if (this.#todoElement !== null) {
+      if (this.#todoElement) {
         this.#replaceExistingTodo(todoTitleInput.value, creationDateAsString, expirationDateAsString);
       } else {
         addTodoToTodosList(todoTitleInput.value, creationDateAsString, expirationDateAsString);
@@ -76,11 +79,11 @@ export class TodoFormModalElement {
     }
   }
 
-  #toggleInvalidClassBasedOnValidity = (input) => {
-    if (input.validity.valid) {
-      input.classList.remove('invalid');
+  #toggleInvalidClassBasedOnValidity = (event) => {
+    if (event.target.validity.valid) {
+      event.target.classList.remove('invalid');
     } else {
-      input.classList.add('invalid');
+      event.target.classList.add('invalid');
     }
   }
 
@@ -89,7 +92,7 @@ export class TodoFormModalElement {
   }
 
   #replaceExistingTodo = (todoTitle, creationDateAsString, expirationDateAsString) => {
-    this.#todoElement.replaceWith(new TodoItemElement(todoTitle, creationDateAsString, expirationDateAsString));
+    this.#todoElement.replaceWith(new TodoItemElement(todoTitle, creationDateAsString, expirationDateAsString).element);
     this.#closeModal();
   }
 }

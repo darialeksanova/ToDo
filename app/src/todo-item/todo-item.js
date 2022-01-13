@@ -40,20 +40,18 @@ export class TodoItemElement {
     this.#setDeleteTodoButtonListener();
     this.#setMarkTodoAsDoneCheckboxListener();
     this.#setEditTodoButtonListener();
+  }
 
+  get element() {
     return this.#todoElement;
   }
 
   #generateCreationDateBasedOnString = (creationDateAsString) => {
-    return creationDateAsString === undefined || creationDateAsString === ''
-      ? new Date()
-      : new Date(creationDateAsString);
+    return creationDateAsString ? new Date(creationDateAsString) : new Date();
   }
 
   #generateExpirationDateBasedOnString = (expirationDateAsString) => {
-    return expirationDateAsString === undefined || expirationDateAsString === ''
-      ? generateTomorrowDate()
-      : new Date(expirationDateAsString);
+    return expirationDateAsString ? new Date(expirationDateAsString) : generateTomorrowDate();
   }
 
   #setMarkTodoAsDoneCheckboxListener = () => {
@@ -71,15 +69,21 @@ export class TodoItemElement {
 
   #setDeleteTodoButtonListener = () => {
     const deleteButton = this.#todoElement.querySelector('.todo-item__actions_delete');
-    deleteButton.addEventListener('click', () => this.#todoElement.remove());
+    deleteButton.addEventListener('click', this.#removeTodoItem);
   }
 
   #setEditTodoButtonListener = () => {
     const editButton = this.#todoElement.querySelector('.todo-item__actions_edit');
-    editButton.addEventListener('click', () => {
-      const todoItemElement = editButton.closest('.todo-item');
-      const todoTitle = todoItemElement.querySelector('.todo-item__task_title').textContent;
-      openTodoFormModal('User todo edit', todoTitle, this.#createdOn, this.#expiresOn, this.#todoElement);
-    });
+    editButton.addEventListener('click', this.#handleEditButtonClick);
+  }
+
+  #removeTodoItem = () => {
+    this.#todoElement.remove();
+  }
+
+  #handleEditButtonClick = (event) => {
+    const todoItemElement = event.target.closest('.todo-item');
+    const todoTitle = todoItemElement.querySelector('.todo-item__task_title').textContent;
+    openTodoFormModal('User todo edit', todoTitle, this.#createdOn, this.#expiresOn, this.#todoElement);
   }
 }

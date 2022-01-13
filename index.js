@@ -1,5 +1,6 @@
 import { addTodoToTodosList } from './app/src/utils/add-todo-to-todos-list';
 import { openTodoFormModal } from './app/src/utils/open-todo-form-modal';
+import { removeInvalidClass } from './app/src/utils/remove-invalid-class';
 
 document.addEventListener('DOMContentLoaded', main);
 
@@ -7,7 +8,7 @@ function main() {
   const openFormModalButton = document.querySelector('.todo__container_form_button');
   const addTodoTitleInput = document.querySelector('.todo__container_form_input');
   addTodoTitleInput.addEventListener('keyup', (event) => permitOrDenyTodoAdding(event, addTodoTitleInput));
-  addTodoTitleInput.addEventListener('blur', (event) => event.target.classList.remove('invalid'));
+  addTodoTitleInput.addEventListener('blur', removeInvalidClass);
   openFormModalButton.addEventListener('click', () => openTodoFormModal('User data set'));
 }
 
