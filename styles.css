@@ -18,6 +18,7 @@ ul {
   align-items: center;
   width: 100vw;
   height: 100vh;
+  min-height: 0;
 }
 
 .todo__container {
@@ -28,6 +29,7 @@ ul {
   padding: 20px;
   border: 3px dashed black;
   flex-grow: 1;
+  min-height: 0;
 }
 
 .todo__container_title {
@@ -84,4 +86,6 @@ ul {
   width: 70%;
   flex-grow: 1;
   overflow-y: auto;
+  min-height: 0;
+  padding: 0 25px;
 }
