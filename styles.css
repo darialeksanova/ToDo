@@ -14,7 +14,8 @@ ul {
 
 .todo {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   width: 100vw;
   height: 100vh;
 }
@@ -26,6 +27,7 @@ ul {
   width: 70vw;
   padding: 20px;
   border: 3px dashed black;
+  flex-grow: 1;
 }
 
 .todo__container_title {
@@ -39,8 +41,8 @@ ul {
   margin-bottom: 30px;
 }
 
-.button {
-  width: 100px;
+.todo__container_actions_button {
+  width: 110px;
   height: 28px;
   margin: 0 6px;
   border: none;
@@ -78,6 +80,8 @@ ul {
 .todo-list {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
   width: 70%;
+  flex-grow: 1;
+  overflow-y: auto;
 }
