@@ -39,7 +39,7 @@ function main() {
     const todosOnPage = document.querySelectorAll('.todo-item');
     todosOnPage.forEach(todo => {
       if([...todo.classList].includes('completed')) {
-        todo.remove()
+        todo.remove();
       }
     });
   });
