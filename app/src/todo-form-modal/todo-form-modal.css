@@ -9,10 +9,6 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-/* .backdrop_visible {
-  display: block;
-} */
-
 .modal {
   position: fixed;
   display: flex;
@@ -28,10 +24,6 @@
   transform: translate(-50%, -50%);
   border-radius: 5px;
 }
-
-/* .modal_visible {
-  display: block;
-} */
 
 .modal__title {
   text-align: center;
