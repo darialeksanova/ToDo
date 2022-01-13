@@ -11,3 +11,73 @@ ul {
 .invalid {
   background-color: rgb(255, 190, 190);
 }
+
+.todo {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.todo__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70vw;
+  padding: 20px;
+  border: 3px dashed black;
+}
+
+.todo__container_title {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.todo__container_actions {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.button {
+  width: 100px;
+  height: 28px;
+  margin: 0 6px;
+  border: none;
+  border-radius: 5px;
+  background-color: rgb(217, 241, 161);
+  cursor: pointer;
+}
+
+.todo__container_form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+  width: 80%;
+}
+
+.todo__container_form_input {
+  width: 350px;
+  height: 28px;
+  padding: 0 10px;
+  border: none;
+  border-bottom: 1px solid rgb(189, 189, 189);
+}
+
+.todo__container_form_button {
+  width: 30px;
+  height: 30px;
+  border: none;
+  background-color: transparent;
+  color: black;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 70%;
+}

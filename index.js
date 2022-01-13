@@ -1,30 +1,29 @@
-import { addTodo } from './src/todo-item/todo-item';
-import { OpenAddTodoExtendedFormModal } from "./src/add-todo-form-modal/add-todo-form-modal";
+import { addTodoToTodosList } from './app/src/utils/add-todo-to-todos-list';
+import { openTodoFormModal } from './app/src/utils/open-todo-form-modal';
+import { removeInvalidClass } from './app/src/utils/remove-invalid-class';
+
+document.addEventListener('DOMContentLoaded', main);
 
 function main() {
-  const openExtendedFormButton = document.querySelector('.todo__form_button');
-  const addTodoTitleInput = document.querySelector('.todo__form_title');
-
-  addTodoTitleInput.addEventListener('keyup', (event) => {
-    const addTodoTitleInputValue = addTodoTitleInput.value;
-
-    if (event.target.validity.valid === false) {
-      addTodoTitleInput.classList.add('invalid');
-    } else {
-      addTodoTitleInput.classList.remove('invalid');
-    }
-
-    if (event.keyCode === 13 && event.target.validity.valid !== false) {
-      addTodo(addTodoTitleInputValue);
-      addTodoTitleInput.value = '';
-    } 
-  });
-
-  addTodoTitleInput.addEventListener('blur', () => {
-    addTodoTitleInput.classList.remove('invalid');
-  });
-  
-  openExtendedFormButton.addEventListener('click', OpenAddTodoExtendedFormModal);
+  const openFormModalButton = document.querySelector('.todo__container_form_button');
+  const addTodoTitleInput = document.querySelector('.todo__container_form_input');
+  addTodoTitleInput.addEventListener('keyup', (event) => permitOrDenyTodoAdding(event, addTodoTitleInput));
+  addTodoTitleInput.addEventListener('blur', removeInvalidClass);
+  openFormModalButton.addEventListener('click', () => openTodoFormModal('User data set'));
 }
 
-main();
+function permitOrDenyTodoAdding(event, addTodoTitleInput) {
+  const addTodoTitleInputValue = addTodoTitleInput.value;
+  const isValid = event.target.validity.valid;
+
+  if (isValid) {
+    addTodoTitleInput.classList.remove('invalid');
+  } else {
+    addTodoTitleInput.classList.add('invalid');
+  }
+
+  if (event.key === 'Enter' && isValid) {
+    addTodoToTodosList(addTodoTitleInputValue);
+    addTodoTitleInput.value = '';
+  }
+}
