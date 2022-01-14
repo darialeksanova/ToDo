@@ -3,14 +3,12 @@ import { openTodoFormModal } from "../utils/open-todo-form-modal";
 
 export class TodoItemElement {
   #todoElement;
-  // #todoTitle;
   #createdOn;
   #expiresOn;
 
   constructor(title, creationDateAsString, expirationDateAsString) {
     this.#createdOn = this.#generateCreationDateBasedOnString(creationDateAsString);
     this.#expiresOn = this.#generateExpirationDateBasedOnString(expirationDateAsString);
-    // this.#todoTitle = title;
 
     this.#todoElement = document.createElement('li');
     this.#todoElement.classList.add('todo-item');
@@ -60,20 +58,12 @@ export class TodoItemElement {
     const isDoneCheckbox = this.#todoElement.querySelector('.todo-item__actions_is-done');
 
     isDoneCheckbox.addEventListener('click', () => {
-      // const todosFromLocalStorageAsString = localStorage.getItem('todoItems');
-      // const todosFromLocalStorageParsed = JSON.parse(todosFromLocalStorageAsString);
-      // const todoToUpdate = todosFromLocalStorageParsed.find(todo => todo.title === this.#todoTitle);
-
       if (isDoneCheckbox.checked === true) {
         this.#todoElement.classList.remove('active');
         this.#todoElement.classList.add('completed');
-        // todoToUpdate.status = 'completed';
-        // localStorage.setItem('todoItems', JSON.stringify(todosFromLocalStorageParsed));
       } else {
         this.#todoElement.classList.remove('completed');
         this.#todoElement.classList.add('active');
-        // todoToUpdate.status = 'active';
-        // localStorage.setItem('todoItems', JSON.stringify(todosFromLocalStorageParsed));
       }
     });
   }
