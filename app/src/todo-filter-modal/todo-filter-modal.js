@@ -24,6 +24,7 @@ export class FilterModalElement {
     this.#setTextInputEventListeners();
     this.#setSortByTextButtonEventListener();
     this.#setSortByDateButtonEventListener();
+    this.#setFilterButtonEventListener();
   }
 
   get element() {
@@ -77,6 +78,21 @@ export class FilterModalElement {
     const todosList = document.querySelector('.todo-list');
     todosList.innerHTML = '';
     todosList.append(...sortedTodos);
+    this.#closeFilterModal();
+  }
+
+  #setFilterButtonEventListener = () => {
+    const filterButton = this.#filterModalElement.querySelector('.filter__modal_submit-button');
+    filterButton.addEventListener('click', this.#filterItemsBasedOnInputValue);
+  }
+
+  #filterItemsBasedOnInputValue = () => {
+    const todosOnPage = document.querySelectorAll('.todo-item');
+    const filterInputValue = this.#filterModalElement.querySelector('.filter__modal_form_input').value;
+    Array.from(todosOnPage).forEach(todo => {
+      const todoTitle = todo.querySelector('.todo-item__task_title').textContent;
+      todoTitle === filterInputValue ? todo.style.display = 'flex' : todo.style.display = 'none';
+    });
     this.#closeFilterModal();
   }
 
