@@ -1,6 +1,7 @@
 import { TodoItemElement } from "../todo-item/todo-item";
 import { addTodoToTodosList } from "../utils/add-todo-to-todos-list";
 import { removeInvalidClass } from "../utils/remove-invalid-class";
+import { toggleInvalidClassBasedOnValidity } from "../utils/toggle-invalid-class-based-on-validity";
 
 export class TodoFormModalElement {
   #todoFormModalElement;
@@ -56,7 +57,7 @@ export class TodoFormModalElement {
 
   #setTodoTitleInputEventListeners = () => {
     const todoTitleInput = this.#todoFormModalElement.querySelector('.modal__form-control_input');
-    todoTitleInput.addEventListener('input', this.#toggleInvalidClassBasedOnValidity);
+    todoTitleInput.addEventListener('input', toggleInvalidClassBasedOnValidity);
     todoTitleInput.addEventListener('blur', removeInvalidClass);
   }
 
@@ -76,14 +77,6 @@ export class TodoFormModalElement {
 
     } else {
       todoTitleInput.classList.add('invalid');
-    }
-  }
-
-  #toggleInvalidClassBasedOnValidity = (event) => {
-    if (event.target.validity.valid) {
-      event.target.classList.remove('invalid');
-    } else {
-      event.target.classList.add('invalid');
     }
   }
 
