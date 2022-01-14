@@ -29,8 +29,8 @@ export class TodoFormModalElement {
         </div>
       </form>
       <div class="modal__actions">
-        <button class="modal__actions_cancel button">Cancel</button>
-        <button class="modal__actions_save button">Save</button>
+        <button class="modal__actions_cancel modal-button">Cancel</button>
+        <button class="modal__actions_save modal-button">Save</button>
       </div>
     </div>`;
 
