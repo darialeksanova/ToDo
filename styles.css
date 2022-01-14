@@ -14,9 +14,11 @@ ul {
 
 .todo {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   width: 100vw;
   height: 100vh;
+  min-height: 0;
 }
 
 .todo__container {
@@ -26,6 +28,8 @@ ul {
   width: 70vw;
   padding: 20px;
   border: 3px dashed black;
+  flex-grow: 1;
+  min-height: 0;
 }
 
 .todo__container_title {
@@ -39,14 +43,28 @@ ul {
   margin-bottom: 30px;
 }
 
-.button {
-  width: 100px;
-  height: 28px;
+.todo__container_actions_button {
+  width: 140px;
+  height: 35px;
   margin: 0 6px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
+  color: #000;
+  background-color: rgb(225, 250, 190);
   border: none;
-  border-radius: 5px;
-  background-color: rgb(217, 241, 161);
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
   cursor: pointer;
+  outline: none;
+  }
+
+.todo__container_actions_button:hover {
+  background-color: rgb(208, 250, 111);
+  box-shadow: 0px 15px 20px rgba(74, 105, 23, 0.37);
+  transform: translateY(-3px);
 }
 
 .todo__container_form {
@@ -78,6 +96,10 @@ ul {
 .todo-list {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
   width: 70%;
+  flex-grow: 1;
+  overflow-y: auto;
+  min-height: 0;
+  padding: 0 25px;
 }
