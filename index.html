@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="./app/src/todo-form-modal/todo-form-modal.css">
+  <link rel="stylesheet" href="./app/src/todo-filter-modal/todo-filter-modal.css">
   <link rel="stylesheet" href="./app/src/todo-item/todo-item.css">
   <title>ToDo</title>
 </head>
@@ -23,8 +24,11 @@
       </div>
 
       <div class="todo__container_form">
+        <button class="todo__container_form_button open-filter-modal-button">
+          <img src="./app/assets/icons/sort-solid.svg" alt="sort">
+        </button>
         <input type="text" class="todo__container_form_input" placeholder="Enter task title" pattern="^[a-zA-Z0-9]+$" required>
-        <button class="todo__container_form_button">
+        <button class="todo__container_form_button open-form-modal-button">
           <img src="./app/assets/icons/plus-solid.svg" alt="set dates">
         </button>
       </div>
