@@ -1,4 +1,5 @@
 import { addTodoToTodosList } from './app/src/utils/add-todo-to-todos-list';
+import { openFilterModal } from './app/src/utils/open-filter-modal';
 import { openTodoFormModal } from './app/src/utils/open-todo-form-modal';
 import { removeInvalidClass } from './app/src/utils/remove-invalid-class';
 
@@ -9,12 +10,14 @@ function main() {
   const activeButton = document.querySelector('.active-button');
   const completedButton = document.querySelector('.completed-button');
   const clearCompletedButton = document.querySelector('.clear-completed-button');
-  const openFormModalButton = document.querySelector('.todo__container_form_button');
+  const openFormModalButton = document.querySelector('.open-form-modal-button');
+  const openFilterModalButton = document.querySelector('.open-filter-modal-button');
   const addTodoTitleInput = document.querySelector('.todo__container_form_input');
 
   addTodoTitleInput.addEventListener('keyup', (event) => permitOrDenyTodoAdding(event, addTodoTitleInput));
   addTodoTitleInput.addEventListener('blur', removeInvalidClass);
   openFormModalButton.addEventListener('click', () => openTodoFormModal('User data set'));
+  openFilterModalButton.addEventListener('click', openFilterModal);
 
   activeButton.addEventListener('click', () => {
     const todosOnPage = document.querySelectorAll('.todo-item');

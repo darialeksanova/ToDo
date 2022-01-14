@@ -78,14 +78,16 @@ ul {
 .todo__container_form_input {
   width: 350px;
   height: 28px;
+  font-size: 16px;
   padding: 0 10px;
   border: none;
   border-bottom: 1px solid rgb(189, 189, 189);
 }
 
 .todo__container_form_button {
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
+  margin: 0 8px;
   border: none;
   background-color: transparent;
   color: black;
