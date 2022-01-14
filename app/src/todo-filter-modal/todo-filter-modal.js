@@ -22,6 +22,9 @@ export class FilterModalElement {
 
     this.#setBackdropClickEventListener();
     this.#setTextInputEventListeners();
+    this.#setSortByTextButtonEventListener();
+    this.#setSortByDateButtonEventListener();
+    this.#setFilterButtonEventListener();
   }
 
   get element() {
@@ -34,10 +37,63 @@ export class FilterModalElement {
       .addEventListener('click', this.#closeFilterModal);
   }
 
+  #setSortByTextButtonEventListener = () => {
+    const sortByTextButton = this.#filterModalElement.querySelector('.by-text-button');
+    sortByTextButton.addEventListener('click', this.#sortTodosByText);
+  }
+
+  #setSortByDateButtonEventListener = () => {
+    const sortByDateButton = this.#filterModalElement.querySelector('.by-date-button');
+    sortByDateButton.addEventListener('click', this.#sortTodosByDate);
+  }
+
   #setTextInputEventListeners = () => {
     const textInput = this.#filterModalElement.querySelector('.filter__modal_form_input');
     textInput.addEventListener('input', toggleInvalidClassBasedOnValidity);
     textInput.addEventListener('blur', removeInvalidClass);
+  }
+
+  #sortTodosByText = () => {
+    const todosOnPage = document.querySelectorAll('.todo-item');
+    const sortedTodos = Array.from(todosOnPage).sort((currentTodo, nextTodo) => {
+      const currentTodoTitle = currentTodo.querySelector('.todo-item__task_title').textContent;
+      const nextTodoTitle = nextTodo.querySelector('.todo-item__task_title').textContent;
+      return currentTodoTitle.localeCompare(nextTodoTitle);
+    });
+    const todosList = document.querySelector('.todo-list');
+    todosList.innerHTML = '';
+    todosList.append(...sortedTodos);
+    this.#closeFilterModal();
+  }
+
+  #sortTodosByDate = () => {
+    const todosOnPage = document.querySelectorAll('.todo-item');
+    const sortedTodos = Array.from(todosOnPage).sort((currentTodo, nextTodo) => {
+      const currentTodoCreationDateSplit = currentTodo.querySelector('.todo-item__task_creation span').textContent.split('.');
+      const nextTodoCreationDateSplit = nextTodo.querySelector('.todo-item__task_creation span').textContent.split('.');
+      const currentTodoCreationDate = new Date(currentTodoCreationDateSplit[0], currentTodoCreationDateSplit[1] - 1, currentTodoCreationDateSplit[2]);
+      const nextTodoCreationDate = new Date(nextTodoCreationDateSplit[0], nextTodoCreationDateSplit[1] - 1, nextTodoCreationDateSplit[2]);
+      return currentTodoCreationDate.getTime() - nextTodoCreationDate.getTime();
+    });
+    const todosList = document.querySelector('.todo-list');
+    todosList.innerHTML = '';
+    todosList.append(...sortedTodos);
+    this.#closeFilterModal();
+  }
+
+  #setFilterButtonEventListener = () => {
+    const filterButton = this.#filterModalElement.querySelector('.filter__modal_submit-button');
+    filterButton.addEventListener('click', this.#filterItemsBasedOnInputValue);
+  }
+
+  #filterItemsBasedOnInputValue = () => {
+    const todosOnPage = document.querySelectorAll('.todo-item');
+    const filterInputValue = this.#filterModalElement.querySelector('.filter__modal_form_input').value;
+    Array.from(todosOnPage).forEach(todo => {
+      const todoTitle = todo.querySelector('.todo-item__task_title').textContent;
+      todoTitle === filterInputValue ? todo.style.display = 'flex' : todo.style.display = 'none';
+    });
+    this.#closeFilterModal();
   }
 
   #closeFilterModal = () => {
